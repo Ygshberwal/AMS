@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../static/css/dashboard_student.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <img src="../static/images/college-logo.jpeg" alt="College Logo" class="logo" />
+      </div>
+      <div class="header-left">
+        <h1>Student Dashboard</h1>
+      </div>
+      <div class="header-right">
+        <span class="student-name">{{ session['name'] }}</span>
+        <a href="#"><img src="../static/images/profile-icon.png" alt="Profile" class="profile-icon" /></a>
+        <form action="{{ url_for('logout') }}" method="post" style="display: inline;">
+          <button type="submit" id="logout-button">Logout</button>
+      </form> 
+      </div>
+    </header>
+
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <ul>
+          <li onclick="handleClassSchedule()">Class Schedule</li>
+          <li onclick="handleAttendanceView()">View Attendance</li>
+          <li onclick="handleAttendanceRequest()">Attendance Request</li>
+          <li onclick="handleLeaveRequest()">Leave Request</li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main>
+        <div class="table-container">
+          
+          <div id="classSchedule">
+            <h3>Schedule</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>CV</th>
+                  <th>Maths(CS-512)</th>
+                  <th>DSA(CS-514)</th>
+                  <th>Advanced CS Practicum(CS-515)</th>
+                  <th>NLP(CS-685)</th>
+                  <th>TC(HS-541)</th>
+                  <th>Philosophy(IK-592_2)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monday</td>
+                  <td></td>
+                  <td>5:30PM</td>
+                  <td>11AM</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Tuesday</td>
+                  <td>10AM</td>
+                  <td>8AM</td>
+                  <td></td>
+                  <td></td>
+                  <td>6:30PM-8PM</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Wednesday</td>
+                  <td></td>
+                  <td>11AM</td>
+                  <td>9AM</td>
+                  <td>2PM-5PM</td>
+                  <td>6:30PM-8PM</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Thursday</td>
+                  <td>8AM</td>
+                  <td></td>
+                  <td>12PM</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Friday</td>
+                  <td>11AM</td>
+                  <td>9AM</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <table id="attendanceView">
+            
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>CV</th>
+                <th>Maths(CS-512)</th>
+                <th>DSA(CS-514)</th>
+                <th>Advanced CS Practicum(CS-515)</th>
+                <th>NLP(CS-685)</th>
+                <th>TC(HS-541)</th>
+                <th>Philosophy(IK-592_2)</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceViewBody"></tbody>
+          </table>
+          <div id="attendanceRequest" class="form-container">
+            <h3>Attendance Request</h3>
+            <form id="uploadForm" onsubmit="return validateForm()">
+              <div class="fe">
+                <label for="course_code">Course Code:</label>
+                <input type="text" id="course_code" name="course_code" required>
+              </div>
+              
+              <div class="fe">
+                <label for="upload_date">Date:</label>
+                <input type="date" id="upload_date" name="upload_date" required>
+              </div>
+              
+              <div class="fe">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div id="leaveRequest" class="form-container">
+            <h3>Leave Request</h3>
+            <form id="uploadForm" onsubmit="return validateForm()">
+              <div class="fe">
+                <label for="upload_date">Start Date:</label>
+                <input type="date" id="upload_date" name="upload_date" required>
+              </div>
+
+              <div class="fe">
+                <label for="upload_date">End Date:</label>
+                <input type="date" id="upload_date" name="upload_date" required>
+              </div>
+             
+              <div class="fe">
+                <label for="leave_reason">Reason:</label>
+                <input type="text" name="leave_reason" required>
+              </div>
+              
+              <div class="fe">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+ 
+
+    <script src="../static/js/dashboard_student.js"></script>
+  </body>
+</html>

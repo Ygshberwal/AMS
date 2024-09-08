@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Attendance Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="../static/images/logo.png" alt="Logo" width="150" > 
+        </div>
+        <h3 style="text-align: center; color: #555;">Welcome to Attendance portal of IIT Mandi!</h3>
+        <h2 style="font-size: 24px; color: #555;">Registeration Form</h2>
+        <div class="radio-group">
+            <label for="role">Role:</label>
+            <input type="radio" id="student" name="role" value="student" checked onclick="showForm('student')">
+            <label for="student">Student</label>
+            <input type="radio" id="teacher" name="role" value="teacher" onclick="showForm('teacher')">
+            <label for="teacher">Teacher</label>
+        </div>
+        <form id="studentForm" class="form-group" method="POST">
+            <input type="hidden" name="role" value="student">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required minlength="2" maxlength="50" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces.">
+            </div>
+            <div class="form-group">
+                <label for="rollno">Roll Number:</label>
+                <input type="text" id="rollno" name="rollno" required>
+            </div>
+            <div class="form-group">
+                <label for="program">Program:</label>
+                <input type="text" id="program" name="program" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required  minlength="8" title="Password should be at least 8 characters long, contain atleast 1 digit, 1 upper & lower case.">
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <form id="teacherForm" class="form-group hidden" method="POST">
+            <input type="hidden" name="role" value="teacher">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required required minlength="2" maxlength="50" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces.">
+            </div>
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required  minlength="8" title="Password should be at least 8 characters long, contain atleast 1 digit, 1 upper & lower case.">
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <p>Already have an account? <a href="login">Login here</a></p>
+    </div>
+
+    <script>
+        function showForm(role) {
+            const studentForm = document.getElementById('studentForm');
+            const teacherForm = document.getElementById('teacherForm');
+            if (role === 'student') {
+                studentForm.classList.remove('hidden');
+                teacherForm.classList.add('hidden');
+            } else {
+                studentForm.classList.add('hidden');
+                teacherForm.classList.remove('hidden');
+            }
+        }
+
+        function validateStudentForm() {
+            const name = document.getElementById('studentName').value.trim();
+            const rollNo = document.getElementById('rollNo').value.trim();
+            const email = document.getElementById('studentEmailID').value.trim();
+            const password = document.getElementById('studentPassword').value.trim();
+
+            // Check for empty fields
+            if (!name || !rollNo || !email || !password) {
+                alert("All fields are required.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateTeacherForm() {
+            const name = document.getElementById('teacherName').value.trim();
+            const department = document.getElementById('department').value.trim();
+            const email = document.getElementById('teacherEmailId').value.trim();
+            const password = document.getElementById('teacherPassword').value.trim();
+
+            // Check for empty fields
+            if (!name || !department || !email || !password) {
+                alert("All fields are required.");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</body>
+</html>

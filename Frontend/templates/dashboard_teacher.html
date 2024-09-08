@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="../static/css/dashboad_teacher.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="profile">
+            <img src="../static/images/profile-icon.png" alt="Profile">
+            <span>{{ session['name'] }}</span>
+        </div>
+        
+        
+        <h3 style="font-size: 22px; margin-bottom: 15px;">Teacher Dashboard</h3>
+        <a href="#" id="mark-attendance-link">Mark Attendance</a>
+        <a href="#" id="view-attendance-link">View Attendance Requests</a>
+        <a href="#" id="view-leave-link">View Leave Requests</a>
+            <!-- Logout Form -->
+            <form action="{{ url_for('logout') }}" method="post" style="display: inline;">
+                <button type="submit" id="logout-button">Logout</button>
+            </form> 
+    </div>
+
+    <div class="content">
+        <!-- Mark Attendance Tab -->
+        <div id="mark-attendance" class="tab-content active">
+            <h2>Mark Attendance</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="course-code">Course Code</label>
+                    <input type="text" id="course-code" name="course_code" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="video">Upload Video</label>
+                    <input type="file" id="video" name="video" accept="video/*" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Upload Attendance</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- View Attendance Requests Tab -->
+        <div id="view-attendance" class="tab-content">
+            <h2>View Attendance Requests</h2>
+            <table class="request-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                        <th>Email ID</th>
+                        <th>Course ID</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example row -->
+                    <tr>
+                        <td>Shivangi</td>
+                        <td>123456</td>
+                        <td>shivi@yahoo.com</td>
+                        <td>CS101</td>
+                        <td>2024-09-06</td>
+                        <td class="button-group">
+                            <button>Approve</button>
+                            <button>Reject</button>
+                        </td>
+                    </tr>
+                    <!-- More rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- View Leave Requests Tab -->
+        <div id="view-leave" class="tab-content">
+            <h2>View Leave Requests</h2>
+            <table class="request-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                        <th>Email ID</th>
+                        <th>Course ID</th>
+                        <th>Total Days</th>
+                        <th>Leave Dates (From - To)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example row -->
+                    <tr>
+                        <td>Shivangi</td>
+                        <td>654321</td>
+                        <td>shivi@gmail.com</td>
+                        <td>CS102</td>
+                        <td>3</td>
+                        <td>2024-09-01 - 2024-09-03</td>
+                        <td class="button-group">
+                            <button>Approve</button>
+                            <button>Reject</button>
+                        </td>
+                    </tr>
+                    <!-- More rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../static/js/dashboard_teacher.js"></script>
+</body>
+</html>
